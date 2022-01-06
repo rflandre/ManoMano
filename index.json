@@ -1,0 +1,246 @@
+openapi: 3.0.0
+info:
+  title: API Documentation
+  description: msf.customer-360 is a kotlin microservice for customer support application's backend.
+  license:
+    name: Apache 2.0
+    url: http://springdoc.org
+  version: 1.0.0
+servers:
+# Added by API Auto Mocking Plugin
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/training8/vfdvdfvdfv/1.0.0
+- url: http://localhost:8087
+  description: Development server url
+- url: https://openapi.int.manomano.com
+  description: Integration server url
+- url: https://openapi.stg.manomano.com
+  description: Staging server url
+- url: https://openapi.manomano.com
+  description: Production server url
+tags:
+- name: Refund
+  description: Manage refund(s) of an order.
+paths:
+  /api/v1/customer360/orders/full-refund:
+    post:
+      tags:
+      - Refund
+      operationId: postFullRefund
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostFullRefundDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseRefund'
+  /api/v1/customer360/orders/{order_id}/refunds:
+    get:
+      tags:
+      - Refund
+      operationId: searchRefundsByOrderId
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseRefund'
+  /api/v1/customer360/refunds/reasons:
+    get:
+      tags:
+      - Refund
+      operationId: searchRefundReasons
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiResponseRefundReasonList'
+components:
+  schemas:
+    PostFullRefundDto:
+      required:
+      - agent_email
+      - order_id
+      - reason
+      type: object
+      properties:
+        seller_id:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
+        reason:
+          type: string
+        agent_email:
+          type: string
+        internal_notes:
+          type: string
+        external_notes:
+          type: string
+    ApiResponseRefund:
+      type: object
+      properties:
+        content:
+          $ref: '#/components/schemas/Refund'
+    ProductInfoTmp:
+      required:
+      - me_reference
+      - price_htc
+      - price_total_ttc
+      - price_ttc
+      - quantity
+      - seller
+      - seller_reference
+      type: object
+      properties:
+        title:
+          type: string
+        image:
+          type: string
+        description:
+          type: string
+        quantity:
+          type: integer
+          format: int32
+        price_ttc:
+          type: integer
+          format: int64
+        price_htc:
+          type: integer
+          format: int64
+        price_total_ttc:
+          type: string
+        seller:
+          $ref: '#/components/schemas/SellerNameDto'
+        seller_reference:
+          type: string
+        me_reference:
+          type: string
+    Refund:
+      required:
+      - products
+      - refunds
+      - total_price
+      type: object
+      properties:
+        refunds:
+          type: array
+          items:
+            $ref: '#/components/schemas/RefundGetDto'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductInfoTmp'
+        total_price:
+          type: integer
+          format: int64
+    RefundGetDto:
+      required:
+      - amount
+      - status_histories
+      type: object
+      properties:
+        seller_id:
+          type: integer
+          format: int64
+        type:
+          type: string
+        status:
+          type: string
+        date:
+          type: string
+        status_histories:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusHistory'
+        amount:
+          type: integer
+          format: int32
+        reason:
+          type: string
+    ApiResponseRefundReasonList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/RefundReason'
+    RefundReason:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+    StatusHistory:
+      required:
+      - created_at
+      - status
+      type: object
+      properties:
+        status:
+          type: string
+        created_at:
+          type: string
+        context:
+          $ref: '#/components/schemas/StatusHistoryContext'
+    SellerNameDto:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    StatusHistoryContext:
+      required:
+      - message
+      - psp
+      type: object
+      properties:
+        psp:
+          type: string
+        message:
+          type: string
+        failed_reason:
+          type: string
