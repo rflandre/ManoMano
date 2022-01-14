@@ -1,0 +1,277 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Simple Zoho API",
+    "description": "This is a simple Zoho API",
+    "version": "0.1"
+  },
+  "servers": [
+    {
+      "url": "https://desk.zoho.com"
+    }
+  ],
+  "paths": {
+    "/api/v1/tickets": {
+      "post": {
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "header",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "717699496"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1_tickets_body"
+              },
+              "examples": {
+                "0": {
+                  "value": "{\n  \"subCategory\" : \"Toys\",\n  \"productId\" : \"512569000000147001\", \n  \"contactId\" : \"512569000000141656\",\n  \"departmentId\" : \"512569000000006907\",\n  \"subject\" : \"Testing Toys ticket\",\n  \"dueDate\" : \"2020-09-21T16:16:16.000Z\",\n  \"description\" : \"Hai This is Description\",\n  \"category\" : \"general\",\n  \"email\" : \"apadilla@theegg.io\", \n  \"status\" : \"Open\"\n}\n"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "item created",
+            "content": {
+              "application/json;charset=UTF-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/v1/products": {
+      "post": {
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "header",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "717699496"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1_products_body"
+              },
+              "examples": {
+                "0": {
+                  "value": "{\n  \"unitPrice\" : \"100\",\n  \"productCode\" : \"123456\",\n  \"departmentIds\" : [\"512569000000006907\"],\n  \"productName\" : \"Toys\"\n}\n"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json;charset=UTF-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "https://desk.zoho.com"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://desk.zoho.com"
+        }
+      ]
+    },
+    "/api/v1/departments": {
+      "get": {
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "header",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "717699496"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json;charset=UTF-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/v1/contacts": {
+      "get": {
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "header",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "717699496"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json;charset=UTF-8": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "0": {
+                    "value": "{\n   \"firstName\": null,\n    \"lastName\": \"Lawrence\",\n    \"email\": \"support@zohodesk.com\",\n    \"secondaryEmail\": null,\n    \"mobile\": null,\n    \"phone\": \"1 888 900 9646\",\n    \"type\": null,\n    \"createdTime\": \"2020-06-22T15:22:53.000Z\",\n    \"ownerId\": \"512569000000139001\",\n    \"accountId\": \"512569000000141347\",\n    \"customerHappiness\": {\n        \"badPercentage\": \"0\",\n        \"okPercentage\": \"0\",\n        \"goodPercentage\": \"0\"\n    },\n    \"zohoCRMContact\": null,\n    \"photoURL\": null,\n    \"webUrl\": \"https://desk.zoho.com/support/theeggio/ShowHomePage.do#Contacts/dv/512569000000141371\",\n    \"id\": \"512569000000141371\",\n    \"isSpam\": false,\n    \"isAnonymous\": false,\n    \"isEndUser\": false\n}\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "https://desk.zoho.com"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://desk.zoho.com"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "v1_products_body": {
+        "type": "object",
+        "properties": {
+          "unitPrice": {
+            "type": "string"
+          },
+          "productCode": {
+            "type": "string"
+          },
+          "departmentIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "productName": {
+            "type": "string"
+          }
+        }
+      },
+      "v1_tickets_body": {
+        "type": "object",
+        "properties": {
+          "subCategory": {
+            "type": "string"
+          },
+          "productId": {
+            "type": "string"
+          },
+          "contactId": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "departmentId": {
+            "type": "string"
+          },
+          "dueDate": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
+}
